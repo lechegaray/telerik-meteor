@@ -1,14 +1,40 @@
 <head>
-  <title>telerik-demo</title>
+  <title>twitter</title>
+  <meta name="keywords" content="Telerik, Kendo UI, Meteor, Meteorjs, Kendo UI Meteor integration, integrate Telerik and Meteor">
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
 
-  {{> hello}}
+<a href="https://github.com/mikamai/telerik-meteor-integration-demo" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 666;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+{{ > tweets }}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+
+<template name="tweets">
+  <div id="tweets"></div>
+  <div id="pager"></div>
+
+  <script type="text/x-kendo-tmpl" id="tweet">
+    <div class="tweet" data-twitter-id="${id}">
+      <ul>
+        <li>
+          <div class="user">
+            <a href="http://twitter.com/${user.screen_name}" aria-label="${user.name} (screen name: ${user.screen_name})" data-scribe="element:user_link">
+              <img alt="" src="${user.profile_image_url}" data-scribe="element:avatar">
+              <span>
+                <span data-scribe="element:name">${user.name}</span>
+              </span>
+              <span data-scribe="element:screen_name">@${user.screen_name}</span>
+            </a>
+          </div>
+          <p class="tweet">${text}</p>
+          <p class="timePosted">Posted <a title="#= moment(created_at).format('dddd, MMMM Do YYYY, h:mm:ss a') #">#= moment(created_at).fromNow() #</a></p>
+          <p class="interact">${place.full_name}</p>
+        </li>
+      </ul>
+    </div>
+  </script>
+
+
 </template>
